@@ -50,7 +50,8 @@ html, body {
     background-size: auto 100%;
     position: absolute;
     right: 8px;
-    top: 8px
+    /*top: 8px;*/
+    top: 32px;
 }
 
 .scaner .cover[data-v-bce73052] {
@@ -111,7 +112,8 @@ html, body {
     width: 100%;
     font-size: 14px;
     color: #fff;
-    opacity: .8
+    opacity: 0.8;
+    text-align: center;
 }
 
 @-webkit-keyframes scan-data-v-bce73052 {
