@@ -94,12 +94,11 @@ let Scanner = {
                 code = jsQR(imageData.data, imageData.width, imageData.height);
             } catch (e) {
                 console.error(e);
+                mui.toast(e, {duration: 'long', type: 'div'});
             }
             if (code) {
                 This.drawBox(code.location);
-
                 This.codeScanned(code.data)
-                // This.found(code.data);
             }
         }
         requestAnimationFrame(This.tick);
@@ -131,29 +130,14 @@ let Scanner = {
         this.canvas.stroke();
     },
 
-    found: function (code){
-        if (this.previousCode !== code) {
-            this.previousCode = code;
-        } else if (this.previousCode === code) {
-            this.parity += 1;
-        }
-        if (this.parity > 2) {
-            this.parity = 0;
-            this.codeScanned(code)
-        }
-    },
-
     codeScanned: function (code){
         this.scanned = code;
         setTimeout(() => {
-            mui.toast(`扫码解析成功: ${code}`, {duration: 'long', type: 'div'});
+            mui.toast(`scan success: ${code}`, {duration: 'long', type: 'div'});
             // 返回上一页并自动填充扫描值
-
-
         }, 200)
     },
 }
-
 
 window.onload = function (){
     console.log('window onload')
