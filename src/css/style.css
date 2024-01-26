@@ -1,0 +1,53 @@
+.mui-title{
+    font-weight: bold;
+}
+#refreshContainer{
+    margin-top: 20px;
+}
+.mui-input-clear{
+    font-size: 14px;
+}
+#authenticationSelect{
+    margin:auto;
+    color:#000;
+}
+.mui-badge1 {
+    padding: 0px;
+    width: 65%;
+    float: right;
+    line-height: 42px;
+    font-size: 14px;
+}
+.mui-input-group{
+    font-size: 14px;
+}
+.mui-input-row label{
+    font-weight: bold;
+}
+.mui-input-row input, .mui-input-row select{
+    font-size: 12px;
+}
+.mui-btn-confirm{
+    font-size: 16px;
+    display: block;
+    width: 96%;
+    padding: 10px 0;
+    margin: 20px 2%;
+}
+
+/*扫码*/
+#scanQR{
+    direction: ltr;
+    position: absolute;
+    bottom: 0;
+    border-radius: 20px;
+    width: auto;
+    height: 35px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    filter: drop-shadow(1px 1px 5px rgba(0,0,0,.25));
+}
+
+.mui-toast-container{
+    width: auto;
+}

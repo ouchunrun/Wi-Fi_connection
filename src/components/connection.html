@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="shortcut icon" href="/icon/favicon.ico">
+	<title>WIFI Portal</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link href="../css/mui.css" rel="stylesheet" />
+<!--	<link rel="stylesheet" href="../css/mui.picker.css"> &lt;!&ndash;	mui 下拉框picker选择器必须引入CSS&ndash;&gt;-->
+<!--	<link rel="stylesheet" href="../css/mui.poppicker.css"> &lt;!&ndash;	mui 下拉框picker选择器必须引入CSS&ndash;&gt;-->
+	<link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+	<header class="mui-bar mui-bar-nav">
+		<h1 class="mui-title">Wi-Fi Connection</h1>
+	</header>
+	<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+		<div class="mui-input-group">
+			<div class="mui-input-row">
+				<label>SSID</label>
+				<input id="ssid" class="mui-input-clear" type="text" placeholder="Please enter SSID"/>
+			</div>
+
+			<div class="mui-input-row">
+				<label>Security Mode</label>
+				<a class="mui-navigate-right">
+					<span class="mui-badge1">
+						<select style="" id="authenticationSelect">
+							<option value="6">WPA/WPA2 PSK</option>
+							<option value="11">WPA3-SAE</option>
+						</select>
+					</span>
+				</a>
+			</div>
+
+			<div class="mui-input-row">
+				<label>Password</label>
+				<input id="pwd" class="mui-input-password" type="password" placeholder="Please enter password" />
+			</div>
+		</div>
+
+		<button type="button" class="mui-btn mui-btn-success mui-btn-confirm" id="validation">Connection</button>
+
+		<button id="scanQR" type="button" class="mui-btn mui-btn-success mui-btn-outlined">SCAN QRCODE</button>
+	</div>
+
+
+	<script type="text/javascript" src="../public/mui.js"></script>
+<!--	<script type="text/javascript" src="../js/mui.min.js"  charset="utf-8"></script>  &lt;!&ndash;	mui 下拉框picker选择器必须引入JS&ndash;&gt;-->
+<!--	<script type="text/javascript" src="../js/mui.picker.js"></script>  &lt;!&ndash;	mui 下拉框picker选择器必须引入JS&ndash;&gt;-->
+	<script type="text/javascript" src="../js/connection.js"></script>
+</body>
+</html>
