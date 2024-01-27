@@ -6,8 +6,6 @@
 	<title>WIFI Portal</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 	<link href="../css/mui.css" rel="stylesheet" />
-<!--	<link rel="stylesheet" href="../css/mui.picker.css"> &lt;!&ndash;	mui 下拉框picker选择器必须引入CSS&ndash;&gt;-->
-<!--	<link rel="stylesheet" href="../css/mui.poppicker.css"> &lt;!&ndash;	mui 下拉框picker选择器必须引入CSS&ndash;&gt;-->
 	<link rel="stylesheet" href="../css/style.css">
 </head>
 
@@ -24,6 +22,11 @@
 			</div>
 
 			<div class="mui-input-row">
+				<label>Password</label>
+				<input id="pwd" class="mui-input-password" type="password" placeholder="Please enter password" />
+			</div>
+
+			<div class="mui-input-row">
 				<label>Security Mode</label>
 				<a class="mui-navigate-right">
 					<span class="mui-badge1">
@@ -34,24 +37,13 @@
 					</span>
 				</a>
 			</div>
-
-			<div class="mui-input-row">
-				<label>Password</label>
-				<input id="pwd" class="mui-input-password" type="password" placeholder="Please enter password" />
-			</div>
 		</div>
 
 		<button type="button" class="mui-btn mui-btn-success mui-btn-confirm" id="validation">Connection</button>
-
-		<a href="javascript:void(0)" class="jump">
-			<button id="scanQR" type="button" class="mui-btn mui-btn-success mui-btn-outlined">SCAN QRCODE</button>
-		</a>
+		<button id="scanQR" type="button" class="mui-btn mui-btn-success mui-btn-outlined">SCAN QRCODE</button>
 	</div>
 
-
 	<script type="text/javascript" src="../public/mui.js"></script>
-<!--	<script type="text/javascript" src="../js/mui.min.js"  charset="utf-8"></script>  &lt;!&ndash;	mui 下拉框picker选择器必须引入JS&ndash;&gt;-->
-<!--	<script type="text/javascript" src="../js/mui.picker.js"></script>  &lt;!&ndash;	mui 下拉框picker选择器必须引入JS&ndash;&gt;-->
 	<script type="text/javascript" src="../js/connection.js"></script>
 </body>
 </html>

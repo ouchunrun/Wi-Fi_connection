@@ -1,10 +1,10 @@
 let validation = document.getElementById('validation')
 let authenticationSelect = document.getElementById('authenticationSelect')
-let ssid
-let pwd
+let ssidElement = document.getElementById('ssid')
+let pwdElement = document.getElementById('pwd')
 validation.onclick = function(){
-    ssid = document.getElementById('ssid').value
-    pwd = document.getElementById('pwd').value
+    let ssid = ssidElement.value
+    let pwd = pwdElement.value
 
     ssid = ssid?.trim()
     if(!ssid){
@@ -59,28 +59,31 @@ scanQRButton.onclick = function (){
     })
 }
 
+window.addEventListener('storage',function (e) {//e只是一个传参
+    console.log('storage change:', e.key, e.newValue)
+    if (e.key === 'QRCode') {
+        try {
+            let QRCode = e.newValue
+            let list = QRCode.slice(QRCode.indexOf(':')+1).split(';')
+            list.forEach(function (data){
+                console.log('data:', data)
+                let value = data.split(':')[1]
+                if(data.startsWith('S:')){   // SSID
+                    ssidElement.value = value
+                }else if(data.startsWith('P:')){  // 密码
+                    pwdElement.value = value
+                }else if(data.startsWith('T:')){  // 加密方式
+                    console.log('security type: ', value)
+                }if(data.startsWith('H:')){  // 网络是否隐藏
+                    console.log('network hide ?', value)
+                }
+            })
 
-mui.init()
-function plusReady(){
-    mui.toast('plusReady', {duration: 'long', type: 'div'});
-    // mui("body").on("tap","#scanQR",function(){
-    //     mui.openWindow({
-    //         url: 'scan.html',
-    //         id: 'scan',
-    //     })
-    // })
-}
-if(window.plus){
-    plusReady();
-}else{
-    document.addEventListener("plusready",plusReady,false);
-}
-//返回回来要执行的方法
-function fun1(e){
-    let val = e.detail.inputVal
-    // $(".a1 font").html(val)
-    mui.toast(val, {duration: 'long', type: 'div'});
-}
-//自定义窗体事件  doit 要和b页面定义的 事件名称一致
-window.addEventListener('doit',fun1);
+            // sessionStorage.setItem('QRCode', '')  // 没刷新
+        }catch (e){
+            console.error(e)
+        }
+
+    }
+},false);
 

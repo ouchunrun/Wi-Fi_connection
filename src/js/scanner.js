@@ -31,7 +31,7 @@ let Scanner = {
         let scannerElement = document.getElementsByClassName('scaner')[0]
         this.containerWidth = scannerElement.clientWidth
         this.containerHeight = scannerElement.clientHeight
-        console.log(`container size: ${this.containerWidth} * ${this.containerHeight}`)
+        console.log(`video size: ${this.containerWidth} * ${this.containerHeight}`)
 
         let closeElement = document.getElementsByClassName('close_icon')[0]
         closeElement.onclick = function (){
@@ -203,7 +203,6 @@ let Scanner = {
         }
         if (this.parity > 2) {
             this.active = !this.stopOnScanned;
-            console.log('this.active：', this.active)
             this.parity = 0;
             this.codeScanned(code)
             this.fullStop();  // 停止扫描
@@ -215,14 +214,12 @@ let Scanner = {
      * @param code
      */
     codeScanned: function (code){
-        console.log('扫描成功')
+        console.log('识别二维码成功')
         this.scanned = code;
         setTimeout(() => {
-            mui.toast(`scan success: ${code}`, {duration: 'long', type: 'div'});
-            // 返回上一页并自动填充扫描值
-
-            let view = plus.webview.getWebviewById("connection")
-            mui.fire(view, 'doit', {inputVal: code});
+            mui.toast("Scan code parsing successful", {duration: 'long', type: 'div'});
+            // mui.toast(`scan success: ${code}`, {duration: 'long', type: 'div'});
+            sessionStorage.setItem('QRCode', code)
             mui.back()
         }, 200)
     },
@@ -238,6 +235,10 @@ let Scanner = {
         this.stopOnScanned = true
     },
 
+    /**
+     * 判断是移动端还是web
+     * @returns {boolean}
+     */
     isMobile: function (){
         return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     }
@@ -256,17 +257,3 @@ window.onload = function (){
 
 mui.init({});
 
-
-if(window.plus){
-    plusReady();
-}else{
-    document.addEventListener("plusready",plusReady,false);
-}
-function plusReady(){
-    mui.toast('scan plusReady', {duration: 'long', type: 'div'});
-    mui("body").on("tap",".jump",function(){
-        let view = plus.webview.getWebviewById("connection")
-        mui.fire(view, 'doit', {inputVal: Scanner.scanned});
-        mui.back()
-    })
-}
