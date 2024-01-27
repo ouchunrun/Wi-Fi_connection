@@ -1,12 +1,20 @@
 // 1.取流，获取相机权限
 let Scanner = {
+    mobile: true,
+    errorMessage: '',
     showPlay: false,
+    parity: 0,
+    previousCode: '',
+    active: false,
     useBackCamera: true,  // 默认后置摄像头
-    lineColor: '#03C03C',
+    stopOnScanned: true,   // 扫描识别后停止
     drawOnFound: true,
+    lineColor: '#03C03C',  // 线条颜色
+    lineWidth: 2, // 线条宽度
     scanned: '', // 扫描结果
-    containerWidth: null,
-    containerHeight: null,
+    containerWidth: null, // 视频宽度
+    containerHeight: null,  // 视频高度
+    responsive: false,
 
     video: null,
     canvas: null,
@@ -18,7 +26,6 @@ let Scanner = {
      */
     init: function (){
         this.canvas = document.getElementById("scan-canvas")
-        this.canvasContext = this.canvas.getContext("2d")
         this.outputContainer = document.getElementById("output")
 
         let scannerElement = document.getElementsByClassName('scaner')[0]
@@ -40,18 +47,39 @@ let Scanner = {
      * 获取摄像机权限
      */
     gum: function (){
+        let str = navigator.userAgent.toLowerCase();
+        let ver = str.match(/cpu iphone os (.*?) like mac os/);
+        if (ver && ver[1].replace(/_/g,".") < '10.3.3') {
+            console.warn('相机调用失败');
+            mui.toast("The camera call failed", {duration: 'long', type: 'div'});
+            return
+        }
+
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia){
+            this.previousCode = null;
+            this.stopOnScanned = false
+            this.active = true;
+            this.canvasContext = this.canvas.getContext("2d")
             const facingMode = Scanner.useBackCamera ? { exact: 'environment' } : 'user';
-            navigator.mediaDevices
-                .getUserMedia({ video: { facingMode } })
+            let constraints = {
+                audio: false,
+                video: true,
+            }
+            if(Scanner.mobile){
+                constraints.video = {
+                    facingMode
+                }
+            }
+            navigator.mediaDevices.getUserMedia(constraints)
                 .then(Scanner.handleGumSuccess)
                 .catch(() => {
-                    navigator.mediaDevices
-                        .getUserMedia({ video: true })
+                    navigator.mediaDevices.getUserMedia({
+                        audio: false,
+                        video: true
+                    })
                         .then(Scanner.handleGumSuccess)
                         .catch(error => {
-                            console.error(error)
-                            mui.toast(error, {duration: 'long', type: 'div'}); // 这里的提示不对
+                            Scanner.errorCaptured(error)
                         });
                 });
         }
@@ -79,9 +107,46 @@ let Scanner = {
         video.setAttribute("playsinline", true); // required to tell iOS safari we don't want fullscreen
         video.play();
 
-        requestAnimationFrame(Scanner.tick);
+        if(Scanner.active){
+            requestAnimationFrame(Scanner.tick);
+        }else {
+            console.warn('扫描结束。。。')
+        }
     },
 
+    /**
+     * 相机访问失败处理
+     * @param error
+     */
+    errorCaptured: function (error){
+        switch (error.name) {
+            case "NotAllowedError":
+                this.errorMessage = "Camera permission denied.";
+                break;
+            case "NotFoundError":
+                this.errorMessage = "There is no connected camera.";
+                break;
+            case "NotSupportedError":
+                this.errorMessage =
+                    "Seems like this page is served in non-secure context.";
+                break;
+            case "NotReadableError":
+                this.errorMessage = "Couldn't access your camera. Is it already in use?";
+                break;
+            case "OverconstrainedError":
+                this.errorMessage = "Constraints don't match any installed camera.";
+                break;
+            default:
+                this.errorMessage = "UNKNOWN ERROR: " + error.message;
+        }
+        console.error(this.errorMessage);
+        console.warn('相机调用失败');
+        mui.toast(this.errorMessage, {duration: 'long', type: 'div'});
+    },
+
+    /**
+     * 识别扫描二维码
+     */
     tick: function (){
         let This = Scanner
         if (This.video && This.video.readyState === This.video.HAVE_ENOUGH_DATA) {
@@ -98,7 +163,7 @@ let Scanner = {
             }
             if (code) {
                 This.drawBox(code.location);
-                This.codeScanned(code.data)
+                This.found(code.data);
             }
         }
         requestAnimationFrame(This.tick);
@@ -107,7 +172,7 @@ let Scanner = {
     /**
      * 画框
      */
-    drawBox: function (){
+    drawBox: function (location){
         if (this.drawOnFound) {
             this.drawLine(location.topLeftCorner, location.topRightCorner);
             this.drawLine(location.topRightCorner, location.bottomRightCorner);
@@ -122,25 +187,66 @@ let Scanner = {
      * @param end
      */
     drawLine: function (begin, end){
-        this.canvas.beginPath();
-        this.canvas.moveTo(begin.x, begin.y);
-        this.canvas.lineTo(end.x, end.y);
-        this.canvas.lineWidth = this.lineWidth;
-        this.canvas.strokeStyle = this.lineColor;
-        this.canvas.stroke();
+        this.canvasContext.beginPath();
+        this.canvasContext.moveTo(begin.x, begin.y);
+        this.canvasContext.lineTo(end.x, end.y);
+        this.canvasContext.lineWidth = this.lineWidth;
+        this.canvasContext.strokeStyle = this.lineColor;
+        this.canvasContext.stroke();
     },
 
+    found: function (code){
+        if (this.previousCode !== code) {
+            this.previousCode = code;
+        } else if (this.previousCode === code) {
+            this.parity += 1;
+        }
+        if (this.parity > 2) {
+            this.active = !this.stopOnScanned;
+            console.log('this.active：', this.active)
+            this.parity = 0;
+            this.codeScanned(code)
+            this.fullStop();  // 停止扫描
+        }
+    },
+
+    /**
+     * 扫描完成的处理时间
+     * @param code
+     */
     codeScanned: function (code){
+        console.log('扫描成功')
         this.scanned = code;
         setTimeout(() => {
             mui.toast(`scan success: ${code}`, {duration: 'long', type: 'div'});
             // 返回上一页并自动填充扫描值
         }, 200)
     },
+
+    /**
+     * 停止video stream
+     */
+    fullStop: function (){
+        console.log('full stop: close stream')
+        if (this.video && this.video.srcObject) {
+            this.video.srcObject.getTracks().forEach(t => t.stop());
+        }
+        this.stopOnScanned = true
+    },
+
+    isMobile: function (){
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
 }
 
 window.onload = function (){
     console.log('window onload')
+    Scanner.mobile = Scanner.isMobile()
+    if (Scanner.mobile) {
+        console.log("mobile");
+    } else {
+        console.log("pc");
+    }
     Scanner.init()
 }
 

@@ -2,8 +2,8 @@ html, body {
     height: 100%;
     padding: 0;
     margin: 0;
-    background: #5F68E8;
-    /*background: #4cd964;*/
+    /*background: #5F68E8;*/
+    background: #4cd964;
     overflow: hidden;
 }
 .scaner[data-v-bce73052] {
@@ -70,7 +70,7 @@ html, body {
     height: 1px;
     margin-left: 10px;
     background: #5f68e8;
-    background: linear-gradient(90deg,transparent,#5f68e8,#0165ff,#5f68e8,transparent);
+    background: linear-gradient(90deg,transparent, #5f68e8,#0165ff,#5f68e8,transparent);
     position: absolute;
     -webkit-animation: scan-data-v-bce73052 1.75s linear infinite;
     animation: scan-data-v-bce73052 1.75s linear infinite;
