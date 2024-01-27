@@ -221,9 +221,9 @@ let Scanner = {
             mui.toast(`scan success: ${code}`, {duration: 'long', type: 'div'});
             // 返回上一页并自动填充扫描值
 
-            let view = plus.webview.currentWebview.opener();
-            view.evalJs("receivename('"+code+"')");
-            mui.back();
+            let view = plus.webview.getWebviewById("connection")
+            mui.fire(view, 'doit', {inputVal: code});
+            mui.back()
         }, 200)
     },
 
@@ -256,8 +256,17 @@ window.onload = function (){
 
 mui.init({});
 
-mui.plusReady(function(){
-    let url = plus.webview.currentWebview().getURL()
-    console.log(`当前页面URL: ${url}`);
-    mui.toast(url, {duration: 'long', type: 'div'});
-});
+
+if(window.plus){
+    plusReady();
+}else{
+    document.addEventListener("plusready",plusReady,false);
+}
+function plusReady(){
+    mui("body").on("tap",".jump",function(){
+        let view = plus.webview.getWebviewById("connection")
+        mui.fire(view, 'doit', {inputVal: Scanner.scanned});
+        mui.back()
+
+    })
+}
