@@ -263,10 +263,10 @@ if(window.plus){
     document.addEventListener("plusready",plusReady,false);
 }
 function plusReady(){
+    mui.toast('scan plusReady', {duration: 'long', type: 'div'});
     mui("body").on("tap",".jump",function(){
         let view = plus.webview.getWebviewById("connection")
         mui.fire(view, 'doit', {inputVal: Scanner.scanned});
         mui.back()
-
     })
 }

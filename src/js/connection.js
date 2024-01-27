@@ -51,23 +51,24 @@ function connectWifi(ssid, passwd, securityType) {
     });
 }
 
-// let scanQRButton = document.getElementById('scanQR')
-// scanQRButton.onclick = function (){
-//     mui.openWindow({
-//         url: 'scan.html',
-//         id: 'scan.html',
-//     })
-// }
+let scanQRButton = document.getElementById('scanQR')
+scanQRButton.onclick = function (){
+    mui.openWindow({
+        url: 'scan.html',
+        id: 'scan.html',
+    })
+}
 
 
 mui.init()
 function plusReady(){
-    mui("body").on("tap","#scanQR",function(){
-        mui.openWindow({
-            url: 'scan.html',
-            id: 'scan',
-        })
-    })
+    mui.toast('plusReady', {duration: 'long', type: 'div'});
+    // mui("body").on("tap","#scanQR",function(){
+    //     mui.openWindow({
+    //         url: 'scan.html',
+    //         id: 'scan',
+    //     })
+    // })
 }
 if(window.plus){
     plusReady();
@@ -76,7 +77,7 @@ if(window.plus){
 }
 //返回回来要执行的方法
 function fun1(e){
-    var val = e.detail.inputVal
+    let val = e.detail.inputVal
     // $(".a1 font").html(val)
     mui.toast(val, {duration: 'long', type: 'div'});
 }
