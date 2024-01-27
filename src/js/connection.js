@@ -63,11 +63,7 @@ scanQRButton.onclick = function (){
 }
 
 
-//返回回来要执行的方法
-function fun1(e){
-    var val=e.detail.inputVal
-    console.log('扫描后返回来的值：', val)
-    // ssid.value = val
+function receivename(invoiceid){
+    console.log('返回的值：', invoiceid)
+    mui.toast(invoiceid,{ duration:'long', type:'div' });
 }
-//自定义窗体事件  doit 要和b页面定义的 事件名称一致
-window.addEventListener('doit',fun1);

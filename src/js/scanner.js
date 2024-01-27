@@ -220,6 +220,10 @@ let Scanner = {
         setTimeout(() => {
             mui.toast(`scan success: ${code}`, {duration: 'long', type: 'div'});
             // 返回上一页并自动填充扫描值
+
+            let view = plus.webview.currentWebview.opener();
+            view.evalJs("receivename('"+code+"')");
+            mui.back();
         }, 200)
     },
 
@@ -251,3 +255,9 @@ window.onload = function (){
 }
 
 mui.init({});
+
+mui.plusReady(function(){
+    let url = plus.webview.currentWebview().getURL()
+    console.log(`当前页面URL: ${url}`);
+    mui.toast(url, {duration: 'long', type: 'div'});
+});
