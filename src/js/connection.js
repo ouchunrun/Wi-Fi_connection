@@ -74,14 +74,15 @@ function parseQRCode(QRCode){
                     } else if (data.startsWith('P:')) {  // 密码
                         //  iOS Safari 已知问题：为了保护用户的隐私安全，使用 JavaScript 设置 <input type="password"> 元素的值是无效的。
                         pwdElement.type = 'text'
-                        pwdElement.classList.remove('mui-input-password')
-                        pwdElement.classList.add('mui-input-clear')
+                        // pwdElement.classList.remove('mui-input-password')
+                        // pwdElement.classList.add('mui-input-clear')
 
                         pwdElement.value = value
 
-                        pwdElement.type = 'password'
-                        pwdElement.classList.remove('mui-input-clear')
-                        pwdElement.classList.add('mui-input-password')
+                        // pwdElement.type = 'password'
+                        // pwdElement.classList.remove('mui-input-clear')
+                        // pwdElement.classList.add('mui-input-password')
+                        pwdVisibilityChange(true)
                     } else if (data.startsWith('T:')) {  // 加密方式
                         console.log('security type: ', value)
                     }else if (data.startsWith('H:')) {  // 网络是否隐藏
@@ -98,18 +99,40 @@ function parseQRCode(QRCode){
 }
 
 /**
+ * 切换密码显示和隐藏
+ * @param visible
+ */
+function pwdVisibilityChange(visible){
+    console.log('set password visible ', visible)
+    let visibilityChange = document.getElementsByClassName('mui-icon mui-icon-eye')[0]
+    if(visible){
+        // 默认显示密码
+        pwdElement.type = 'text'
+        visibilityChange.classList.add('mui-active')
+    }else {
+        pwdElement.type = 'password'
+        visibilityChange.classList.remove('mui-active')
+    }
+}
+
+/**
  * 监听页面变化，自动填充页面扫描值
  */
 document.addEventListener('visibilitychange', function() {
     let isHidden = document.hidden;
-    // console.log(`document visibilityState is ${document.visibilityState}`)
+    console.log(`document visibilityState is ${document.visibilityState}`)
     if (isHidden) {
         sessionStorage.setItem('QRCode', '')
     } else {
         let QRCode = sessionStorage.getItem('QRCode')
         parseQRCode(QRCode)
+        pwdVisibilityChange(true)
     }
 })
+
+window.onload = function (){
+    pwdVisibilityChange(true)
+}
 
 // window.addEventListener('refresh', function(e) {
 //     console.warn('refresh')
