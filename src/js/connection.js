@@ -59,31 +59,32 @@ scanQRButton.onclick = function (){
     })
 }
 
-window.addEventListener('storage',function (e) {//e只是一个传参
-    console.log('storage change:', e.key, e.newValue)
-    if (e.key === 'QRCode') {
-        try {
-            let QRCode = e.newValue
-            let list = QRCode.slice(QRCode.indexOf(':')+1).split(';')
-            list.forEach(function (data){
-                console.log('data:', data)
-                let value = data.split(':')[1]
-                if(data.startsWith('S:')){   // SSID
-                    ssidElement.value = value
-                }else if(data.startsWith('P:')){  // 密码
-                    pwdElement.value = value
-                }else if(data.startsWith('T:')){  // 加密方式
-                    console.log('security type: ', value)
-                }if(data.startsWith('H:')){  // 网络是否隐藏
-                    console.log('network hide ?', value)
-                }
-            })
+window.addEventListener('refresh', function(e) {
+    console.warn('refresh：', refresh)
+//在父页面中添加监听事件，刷新页面
+    location.reload();
+});
 
-            // sessionStorage.setItem('QRCode', '')  // 没刷新
-        }catch (e){
-            console.error(e)
-        }
 
+window.addEventListener('load', function (){
+    let QRCode = sessionStorage.getItem('QRCode')
+    console.warn('QRCode:', QRCode)
+    if(QRCode) {
+        let list = QRCode.slice(QRCode.indexOf(':') + 1).split(';')
+        list.forEach(function (data) {
+            console.log('data:', data)
+            let value = data.split(':')[1]
+            if (data.startsWith('S:')) {   // SSID
+                ssidElement.value = value
+            } else if (data.startsWith('P:')) {  // 密码
+                pwdElement.value = value
+            } else if (data.startsWith('T:')) {  // 加密方式
+                console.log('security type: ', value)
+            }
+            if (data.startsWith('H:')) {  // 网络是否隐藏
+                console.log('network hide ?', value)
+            }
+        })
     }
-},false);
-
+    sessionStorage.setItem('QRCode', '')
+})

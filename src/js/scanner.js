@@ -219,8 +219,11 @@ let Scanner = {
         setTimeout(() => {
             mui.toast("Scan code parsing successful", {duration: 'long', type: 'div'});
             // mui.toast(`scan success: ${code}`, {duration: 'long', type: 'div'});
+
+            console.log('set QRCode into storage:', code)
             sessionStorage.setItem('QRCode', code)
-            mui.back()
+            let paramsToPassBack = {QRCode: code}
+            mui.back(paramsToPassBack)
         }, 200)
     },
 
@@ -255,5 +258,22 @@ window.onload = function (){
     Scanner.init()
 }
 
-mui.init({});
+mui.init({
+    beforeback: function(){
+        console.log('beforeback')
+        try {
+            //获得列表界面的webview
+            //var list = plus.webview.currentWebview().opener();
+            //目标页面
+            let list = plus.webview.getWebviewById('connection');
+            //触发列表界面的自定义事件（refresh）,从而进行数据刷新
+            mui.fire(list, 'refresh');
+        }catch (e){
+            console.log('plus undefined.')
+            mui.toast("plus undefined", {duration: 'long', type: 'div'});
+        }
+        //返回true，继续页面关闭逻辑
+        return true;
+    }
+});
 
