@@ -67,16 +67,26 @@ function parseQRCode(QRCode){
         try {
             let list = QRCode.slice(QRCode.indexOf(':') + 1).split(';')
             list.forEach(function (data) {
-                let value = data.split(':')[1]
-                if (data.startsWith('S:')) {   // SSID
-                    ssidElement.value = value
-                } else if (data.startsWith('P:')) {  // 密码
-                    pwdElement.value = value
-                } else if (data.startsWith('T:')) {  // 加密方式
-                    console.log('security type: ', value)
-                }
-                if (data.startsWith('H:')) {  // 网络是否隐藏
-                    console.log('network hide ?', value)
+                if(data){
+                    let value = data.split(':')[1]
+                    if (data.startsWith('S:')) {   // SSID
+                        ssidElement.value = value
+                    } else if (data.startsWith('P:')) {  // 密码
+                        //  iOS Safari 已知问题：为了保护用户的隐私安全，使用 JavaScript 设置 <input type="password"> 元素的值是无效的。
+                        pwdElement.type = 'text'
+                        pwdElement.classList.remove('mui-input-password')
+                        pwdElement.classList.add('mui-input-clear')
+
+                        pwdElement.value = value
+
+                        pwdElement.type = 'password'
+                        pwdElement.classList.remove('mui-input-clear')
+                        pwdElement.classList.add('mui-input-password')
+                    } else if (data.startsWith('T:')) {  // 加密方式
+                        console.log('security type: ', value)
+                    }else if (data.startsWith('H:')) {  // 网络是否隐藏
+                        console.log('network hide ?', value)
+                    }
                 }
             })
         }catch (e){
@@ -92,12 +102,11 @@ function parseQRCode(QRCode){
  */
 document.addEventListener('visibilitychange', function() {
     let isHidden = document.hidden;
-    console.log(`document visibilityState is ${document.visibilityState}`)
+    // console.log(`document visibilityState is ${document.visibilityState}`)
     if (isHidden) {
         sessionStorage.setItem('QRCode', '')
     } else {
         let QRCode = sessionStorage.getItem('QRCode')
-        console.warn('load QRCode:', QRCode)
         parseQRCode(QRCode)
     }
 })
