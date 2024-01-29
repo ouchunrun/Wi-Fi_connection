@@ -47,7 +47,3 @@
     transform: translate(-50%, -50%);
     filter: drop-shadow(1px 1px 5px rgba(0,0,0,.25));
 }
-
-.mui-toast-container{
-    width: auto;
-}

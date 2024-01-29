@@ -259,25 +259,20 @@ window.onload = function (){
 }
 
 mui.init({
-    beforeback: function(){
-        console.log('beforeback')
-        if(window.plus){
-            //获得列表界面的webview
-            //var list = plus.webview.currentWebview().opener();
-            //目标页面
-            let list = plus.webview.getWebviewById('connection');
-            //触发列表界面的自定义事件（refresh）,从而进行数据刷新
-            mui.fire(list, 'refresh');
-        }else {
-            alert('plus undefined.....')
-            console.log('plus undefined.')
-            mui.toast("plus undefined", {duration: 'long', type: 'div'});
-        }
-        //返回true，继续页面关闭逻辑
-        return true;
-    }
+    // beforeback: function(){
+    //     if(window.plus){
+    //         let list = plus.webview.currentWebview().opener();
+    //         mui.fire(list, 'refresh');
+    //     }else {
+    //         alert('plus undefined.....')
+    //         console.log('plus undefined.')
+    //         mui.toast("plus undefined", {duration: 'long', type: 'div'});
+    //     }
+    //     return true;
+    // },
 });
 
-mui.plusReady(function() {
-    alert('plusReady 完成', window.plus)
-});
+// 存在问题：mui.plusReady 不触发，无法访问plus
+// mui.plusReady(function() {
+//     alert('plusReady 完成', window.plus)
+// });
