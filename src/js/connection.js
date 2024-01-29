@@ -74,14 +74,7 @@ function parseQRCode(QRCode){
                     } else if (data.startsWith('P:')) {  // 密码
                         //  iOS Safari 已知问题：为了保护用户的隐私安全，使用 JavaScript 设置 <input type="password"> 元素的值是无效的。
                         pwdElement.type = 'text'
-                        // pwdElement.classList.remove('mui-input-password')
-                        // pwdElement.classList.add('mui-input-clear')
-
                         pwdElement.value = value
-
-                        // pwdElement.type = 'password'
-                        // pwdElement.classList.remove('mui-input-clear')
-                        // pwdElement.classList.add('mui-input-password')
                         pwdVisibilityChange(true)
                     } else if (data.startsWith('T:')) {  // 加密方式
                         console.log('security type: ', value)
@@ -106,8 +99,7 @@ function pwdVisibilityChange(visible){
     console.log('set password visible ', visible)
     let visibilityChange = document.getElementsByClassName('mui-icon mui-icon-eye')[0]
     if(visible){
-        // 默认显示密码
-        pwdElement.type = 'text'
+        pwdElement.type = 'text' // default show password
         visibilityChange.classList.add('mui-active')
     }else {
         pwdElement.type = 'password'
@@ -133,24 +125,3 @@ document.addEventListener('visibilitychange', function() {
 window.onload = function (){
     pwdVisibilityChange(true)
 }
-
-// window.addEventListener('refresh', function(e) {
-//     console.warn('refresh')
-//     alert('page refresh')
-//     //在父页面中添加监听事件，刷新页面
-//     let QRCode = e.newValue
-//     console.warn('refresh QRCode:', QRCode)
-//     alert('refresh code:', QRCode)
-//     parseQRCode(QRCode)
-// });
-//
-//
-// window.addEventListener('load', function (){
-//     console.log('load....')
-//     let QRCode = sessionStorage.getItem('QRCode')
-//     console.warn('load QRCode:', QRCode)
-//     alert('load code:', QRCode)
-//     parseQRCode(QRCode)
-//     sessionStorage.setItem('QRCode', '')
-// })
-

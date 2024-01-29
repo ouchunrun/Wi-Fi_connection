@@ -258,21 +258,4 @@ window.onload = function (){
     Scanner.init()
 }
 
-mui.init({
-    // beforeback: function(){
-    //     if(window.plus){
-    //         let list = plus.webview.currentWebview().opener();
-    //         mui.fire(list, 'refresh');
-    //     }else {
-    //         alert('plus undefined.....')
-    //         console.log('plus undefined.')
-    //         mui.toast("plus undefined", {duration: 'long', type: 'div'});
-    //     }
-    //     return true;
-    // },
-});
-
-// 存在问题：mui.plusReady 不触发，无法访问plus
-// mui.plusReady(function() {
-//     alert('plusReady 完成', window.plus)
-// });
+mui.init({});
