@@ -69,6 +69,7 @@ function parseQRCode(QRCode){
             list.forEach(function (data) {
                 console.log('data:', data)
                 let value = data.split(':')[1]
+                mui.alert(`${data} 的 value: ${value}`)
                 if (data.startsWith('S:')) {   // SSID
                     ssidElement.value = value
                 } else if (data.startsWith('P:')) {  // 密码
