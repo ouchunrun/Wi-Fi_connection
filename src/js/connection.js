@@ -60,7 +60,8 @@ scanQRButton.onclick = function (){
 }
 
 window.addEventListener('refresh', function(e) {
-    console.warn('refresh：', refresh)
+    console.warn('refresh')
+    alert('page refresh')
 //在父页面中添加监听事件，刷新页面
     location.reload();
 });
