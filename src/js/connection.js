@@ -68,6 +68,7 @@ window.addEventListener('refresh', function(e) {
 
 
 window.addEventListener('load', function (){
+    console.log('load....')
     let QRCode = sessionStorage.getItem('QRCode')
     console.warn('QRCode:', QRCode)
     if(QRCode) {

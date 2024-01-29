@@ -261,14 +261,15 @@ window.onload = function (){
 mui.init({
     beforeback: function(){
         console.log('beforeback')
-        try {
+        if(window.plus){
             //获得列表界面的webview
             //var list = plus.webview.currentWebview().opener();
             //目标页面
             let list = plus.webview.getWebviewById('connection');
             //触发列表界面的自定义事件（refresh）,从而进行数据刷新
             mui.fire(list, 'refresh');
-        }catch (e){
+        }else {
+            alert('plus undefined.....')
             console.log('plus undefined.')
             mui.toast("plus undefined", {duration: 'long', type: 'div'});
         }
@@ -277,3 +278,6 @@ mui.init({
     }
 });
 
+mui.plusReady(function() {
+    alert('plusReady 完成', window.plus)
+});
