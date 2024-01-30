@@ -10,33 +10,24 @@
 </head>
 
 <body>
-
-	<header class="mui-bar mui-bar-nav">
-		<h1 class="mui-title">Wi-Fi Connection</h1>
-	</header>
 	<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
 		<div class="mui-login">
+			<h2 class="mui-title">Wi-Fi Connection</h2>
+
 			<div class="mui-input-group">
 				<div class="mui-input-row">
-					<label>SSID</label>
-					<input id="ssid" class="mui-input-clear" type="text" placeholder="Please enter SSID"/>
+					<input id="ssid" class="mui-input-clear" type="text" placeholder="Enter SSID"/>
 				</div>
 
 				<div class="mui-input-row">
-					<label>Password</label>
-					<input id="pwd" class="mui-input-password" type="text" placeholder="Please enter password" />
+					<input id="pwd" class="mui-input-password" type="text" placeholder="Enter password" />
 				</div>
 
 				<div class="mui-input-row">
-					<label>Security Mode</label>
-					<a class="mui-navigate-right">
-					<span class="mui-badge1">
-						<select style="" id="authenticationSelect">
-							<option value="6">WPA/WPA2 PSK</option>
-							<option value="11">WPA3-SAE</option>
-						</select>
-					</span>
-					</a>
+					<select style="" id="authenticationSelect">
+						<option value="6">WPA/WPA2 PSK</option>
+						<option value="11">WPA3-SAE</option>
+					</select>
 				</div>
 			</div>
 
