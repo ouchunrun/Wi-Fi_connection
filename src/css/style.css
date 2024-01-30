@@ -1,11 +1,15 @@
 
 #refreshContainer{
-    background-color: #f4f4f4;
+    background: radial-gradient(closest-corner circle at center 300px, #2f3850, #1d222c);
 }
 #authenticationSelect{
     margin:auto;
     color:#000;
     padding: 10px 15px;
+}
+#scanQR{
+    color: #2d65e7;
+    border: 1px solid #2d65e7;
 }
 .mui-title{
     position: relative;
@@ -14,12 +18,14 @@
     text-align: center;
     margin: 20px 0;
     font-size: 20px;
+    color: aliceblue;
 }
 .mui-input-clear{
     font-size: 14px;
 }
 .mui-input-group{
     font-size: 14px;
+    background: none;
 }
 .mui-input-group:before, .mui-input-group:after, .mui-input-row:after, .mui-input-group .mui-input-row:after{
     height: 0;
@@ -30,11 +36,12 @@
 .mui-input-row{
     width: 80%;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 2px;
     margin: 20px auto;
 }
 .mui-input-row input, .mui-input-row select{
     font-size: 14px;
+    background-color: #fff;
 }
 .mui-btn-confirm{
     font-size: 16px;
@@ -42,6 +49,8 @@
     width: 80%;
     padding: 10px 0;
     margin: 20px auto;
+    background: linear-gradient(to bottom, #5689ff, #2d65e7);
+    border: none;
 }
 
 .mui-login{
@@ -52,7 +61,6 @@
     width: 100%;
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
 }
 /*扫码*/
 #scanQR{

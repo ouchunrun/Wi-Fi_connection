@@ -2,8 +2,7 @@ html, body {
     height: 100%;
     padding: 0;
     margin: 0;
-    /*background: #5F68E8;*/
-    background: #4cd964;
+    background: linear-gradient(to bottom, #5689ff, #2d65e7);
     overflow: hidden;
 }
 .scaner[data-v-bce73052] {
