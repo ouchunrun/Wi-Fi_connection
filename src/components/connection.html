@@ -12,8 +12,26 @@
 <body>
 	<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
 		<div class="mui-login">
-			<div class="wifi-Signal">
-				<span class="flash-icon"></span>
+			<!--焦点扩散渐变动画-->
+<!--			<div class="wifi-Signal">-->
+<!--				<span class="flash-icon"></span>-->
+<!--			</div>-->
+
+			<!--wifi搜索-->
+			<div id="wifi-loader">
+				<svg class="circle-outer" viewBox="0 0 86 86">
+					<circle class="back" cx="43" cy="43" r="40"></circle>
+					<circle class="front" cx="43" cy="43" r="40"></circle>
+					<circle class="new" cx="43" cy="43" r="40"></circle>
+				</svg>
+				<svg class="circle-middle" viewBox="0 0 60 60">
+					<circle class="back" cx="30" cy="30" r="27"></circle>
+					<circle class="front" cx="30" cy="30" r="27"></circle>
+				</svg>
+				<svg class="circle-inner" viewBox="0 0 34 34">
+					<circle class="back" cx="17" cy="17" r="14"></circle>
+					<circle class="front" cx="17" cy="17" r="14"></circle>
+				</svg>
 			</div>
 
 			<h2 class="mui-title">Wi-Fi Connection</h2>
@@ -35,9 +53,9 @@
 				</div>
 			</div>
 
-			<button type="button" class="mui-btn mui-btn-success mui-btn-confirm" id="validation">Connection</button>
+			<button type="button" class="mui-btn mui-btn-confirm" id="validation">Connection</button>
 		</div>
-		<button id="scanQR" type="button" class="mui-btn mui-btn-success mui-btn-outlined">SCAN QRCODE</button>
+		<button id="scanQR" type="button" class="mui-btn mui-btn-outlined">SCAN QRCODE</button>
 	</div>
 
 	<script type="text/javascript" src="../public/mui.js"></script>
