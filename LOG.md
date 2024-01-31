@@ -22,3 +22,4 @@
 
 * 1.修改wifi动画，替换为wifi连接图标
 * 2.解决ios safari 隐藏密码后扫描二维码，密码无法自动填充问题
+* 3.onload 时获取QRCode

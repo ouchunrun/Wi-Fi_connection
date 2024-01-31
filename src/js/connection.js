@@ -10,10 +10,12 @@ scanQRButton.onclick = function (){
         id: 'scan.html',
     })
 
-    // todo: ios safari 隐藏密码后扫描二维码，密码无法自动填充！
-    pwdElement.type = 'text'
-    let visibilityChange = document.getElementsByClassName('mui-icon mui-icon-eye')[0]
-    visibilityChange.classList.add('mui-active')
+    if(mui.os.ios){
+        // todo: ios safari 隐藏密码后扫描二维码，密码无法自动填充！
+        pwdElement.type = 'text'
+        let visibilityChange = document.getElementsByClassName('mui-icon mui-icon-eye')[0]
+        visibilityChange.classList.add('mui-active')
+    }
 }
 
 validation.onclick = function(){
@@ -128,5 +130,9 @@ document.addEventListener('visibilitychange', function() {
 })
 
 window.onload = function (){
+    let QRCode = sessionStorage.getItem('QRCode')
+    if(QRCode){
+        parseQRCode(QRCode)
+    }
     pwdVisibilityChange(true)
 }
