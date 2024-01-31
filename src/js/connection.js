@@ -5,6 +5,11 @@ let pwdElement = document.getElementById('pwd')
 
 let scanQRButton = document.getElementById('scanQR')
 scanQRButton.onclick = function (){
+    // todo: ios safari 隐藏密码后扫描二维码，密码无法自动填充！
+    pwdElement.type = 'text'
+    let visibilityChange = document.getElementsByClassName('mui-icon mui-icon-eye')[0]
+    visibilityChange.classList.add('mui-active')
+
     mui.openWindow({
         url: 'scan.html',
         id: 'scan.html',
