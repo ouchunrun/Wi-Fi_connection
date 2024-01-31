@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<link rel="shortcut icon" href="/icon/favicon.ico">
-	<title>WIFI Portal</title>
+	<title>WIFI Connection</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 	<link href="../css/mui.css" rel="stylesheet" />
 	<link rel="stylesheet" href="../css/style.css">
@@ -18,24 +18,26 @@
 <!--			</div>-->
 
 			<!--wifi搜索-->
-			<div id="wifi-loader">
-				<svg class="circle-outer" viewBox="0 0 86 86">
-					<circle class="back" cx="43" cy="43" r="40"></circle>
-					<circle class="front" cx="43" cy="43" r="40"></circle>
-					<circle class="new" cx="43" cy="43" r="40"></circle>
-				</svg>
-				<svg class="circle-middle" viewBox="0 0 60 60">
-					<circle class="back" cx="30" cy="30" r="27"></circle>
-					<circle class="front" cx="30" cy="30" r="27"></circle>
-				</svg>
-				<svg class="circle-inner" viewBox="0 0 34 34">
-					<circle class="back" cx="17" cy="17" r="14"></circle>
-					<circle class="front" cx="17" cy="17" r="14"></circle>
-				</svg>
+<!--			<div id="wifi-loader">-->
+<!--				<svg class="circle-outer" viewBox="0 0 86 86">-->
+<!--					<circle class="back" cx="43" cy="43" r="40"></circle>-->
+<!--					<circle class="front" cx="43" cy="43" r="40"></circle>-->
+<!--					<circle class="new" cx="43" cy="43" r="40"></circle>-->
+<!--				</svg>-->
+<!--				<svg class="circle-middle" viewBox="0 0 60 60">-->
+<!--					<circle class="back" cx="30" cy="30" r="27"></circle>-->
+<!--					<circle class="front" cx="30" cy="30" r="27"></circle>-->
+<!--				</svg>-->
+<!--				<svg class="circle-inner" viewBox="0 0 34 34">-->
+<!--					<circle class="back" cx="17" cy="17" r="14"></circle>-->
+<!--					<circle class="front" cx="17" cy="17" r="14"></circle>-->
+<!--				</svg>-->
+<!--			</div>-->
+
+			<div class="wifi-icon">
+				<span class="GRP-icon-wifi"></span>
 			</div>
-
 			<h2 class="mui-title">Wi-Fi Connection</h2>
-
 			<div class="mui-input-group">
 				<div class="mui-input-row">
 					<input id="ssid" class="mui-input-clear" type="text" placeholder="Enter SSID"/>
@@ -45,7 +47,7 @@
 					<input id="pwd" class="mui-input-password" type="text" placeholder="Enter password" />
 				</div>
 
-				<div class="mui-input-row">
+				<div class="mui-input-row mui-input-row-select">
 					<select style="" id="authenticationSelect">
 						<option value="6">WPA/WPA2 PSK</option>
 						<option value="11">WPA3-SAE</option>
@@ -55,7 +57,9 @@
 
 			<button type="button" class="mui-btn mui-btn-confirm" id="validation">Connection</button>
 		</div>
-		<button id="scanQR" type="button" class="mui-btn mui-btn-outlined">SCAN QRCODE</button>
+		<div id="scanQR">
+			<span class="GRP-icon-Scan-QRCode scan-QRCode" ></span>
+		</div>
 	</div>
 
 	<script type="text/javascript" src="../public/mui.js"></script>

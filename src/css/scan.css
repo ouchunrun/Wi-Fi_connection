@@ -2,7 +2,8 @@ html, body {
     height: 100%;
     padding: 0;
     margin: 0;
-    background: linear-gradient(to bottom, #5689ff, #2d65e7);
+    /*background: linear-gradient(to bottom, #5689ff, #2d65e7);*/
+    background: radial-gradient(closest-corner circle at center 300px, #2f3850, #1d222c);
     overflow: hidden;
 }
 .scaner[data-v-bce73052] {
