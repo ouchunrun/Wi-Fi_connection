@@ -11,7 +11,7 @@ scanQRButton.onclick = function (){
     })
 
     if(mui.os.ios){
-        // todo: ios safari 隐藏密码后扫描二维码，密码无法自动填充！
+        // Todo: ios safari 隐藏密码后扫描二维码，密码无法自动填充！
         pwdElement.type = 'text'
         let visibilityChange = document.getElementsByClassName('mui-icon mui-icon-eye')[0]
         visibilityChange.classList.add('mui-active')

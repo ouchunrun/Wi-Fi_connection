@@ -1,4 +1,4 @@
-// 1.取流，获取相机权限
+
 let Scanner = {
     mobile: true,
     errorMessage: '',
@@ -50,7 +50,7 @@ let Scanner = {
         let str = navigator.userAgent.toLowerCase();
         let ver = str.match(/cpu iphone os (.*?) like mac os/);
         if (ver && ver[1].replace(/_/g,".") < '10.3.3') {
-            console.warn('相机调用失败');
+            console.warn('The camera call failed');
             mui.toast("The camera call failed", {duration: 'long', type: 'div'});
             return
         }
@@ -110,7 +110,7 @@ let Scanner = {
         if(Scanner.active){
             requestAnimationFrame(Scanner.tick);
         }else {
-            console.warn('扫描结束。。。')
+            console.warn('Scan complete ...')
         }
     },
 
@@ -140,7 +140,7 @@ let Scanner = {
                 this.errorMessage = "UNKNOWN ERROR: " + error.message;
         }
         console.error(this.errorMessage);
-        console.warn('相机调用失败');
+        console.warn('Camera call failed!');
         mui.toast(this.errorMessage, {duration: 'long', type: 'div'});
     },
 
@@ -210,11 +210,11 @@ let Scanner = {
     },
 
     /**
-     * 扫描完成的处理时间
+     * 扫描完成的处理事件
      * @param code
      */
     codeScanned: function (code){
-        console.log('识别二维码成功')
+        console.log('Successful identification of QR code')
         this.scanned = code;
         setTimeout(() => {
             mui.toast("Scan code parsing successful", {duration: 'long', type: 'div'});
