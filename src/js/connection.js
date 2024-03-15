@@ -23,17 +23,64 @@ validation.onclick = function(){
     let pwd = pwdElement.value
 
     ssid = ssid?.trim()
-    if(!ssid){
-        mui.toast('Please enter SSID',{ duration:'long', type:'div' });
-        return
+    if(!ssid || ssid.length > 32){
+        mui.toast('Please enter 1~32 digit SSID',{ duration:'long', type:'div' });
     }
+
     pwd = pwd?.trim()
-    if(!pwd){
-        mui.toast('Please enter password',{ duration:'long', type:'div' });
+    if(!pwd || pwd.length < 8 || pwd.length > 32){
+        mui.toast('Please enter 8~32 digit password',{ duration:'long', type:'div' });
         return
     }
+
     let type = authenticationSelect.options[authenticationSelect.selectedIndex].value
     connectWifi(ssid, pwd, type)
+}
+
+/**
+ * 监听下拉选择框该改变事件
+ * @type {checkSecurityModeType}
+ */
+authenticationSelect.onchange = checkSecurityModeType
+
+/**
+ * 监听密码输入
+ * @param event
+ */
+pwdElement.onkeyup = function (event){
+    let value = event.target.value
+    if(findChinese(value)){
+        mui.toast('Chinese password is not supported',{ duration:'long', type:'div' });
+    }
+    // 密码禁止输入中文
+    event.target.value = value.replace(/[^\x00-\xff]/g, '')
+}
+
+/**
+ * 判断是否包含中文
+ * @param value
+ * @returns {boolean}
+ */
+function findChinese(value){
+    return /.*[\u4e00-\u9fa5]+.*$/.test(value);
+}
+
+/**
+ * 检查当前安全模式
+ */
+function checkSecurityModeType(){
+    let target = authenticationSelect
+    let pskType = target.options[target.selectedIndex].value
+    if(Number(pskType) === 0){
+        // 开放模式下不需要输入密码
+        // pwdElement.value = ''
+        pwdElement.disabled = true
+        console.log('disabled password input')
+    }else {
+        // 其他模式时密码限制为 8-23 位
+        pwdElement.disabled = false
+        console.log('enabled password input')
+    }
 }
 
 /**
@@ -46,9 +93,9 @@ function connectWifi(ssid, passwd, securityType) {
     let url = document.location.origin + '/cgi-bin/api-wifi_try_connect'
     mui.ajax(url, {
         data: {
-            "ssid": ssid,
-            "passwd": passwd,
-            "securityType": securityType,
+            ssid: ssid,
+            passwd: passwd,
+            securityType: parseInt(securityType),
         },
         dataType: 'json',
         type: 'POST',
@@ -135,4 +182,5 @@ window.onload = function (){
         parseQRCode(QRCode)
     }
     pwdVisibilityChange(true)
+    checkSecurityModeType()
 }

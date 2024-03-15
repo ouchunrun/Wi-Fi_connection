@@ -18,19 +18,19 @@
 			<h2 class="mui-title">Wi-Fi Connection</h2>
 			<div class="mui-input-group">
 				<div class="mui-input-row">
-					<input id="ssid" class="mui-input-clear" type="text" placeholder="Enter SSID"/>
+					<input id="ssid" class="mui-input-clear" type="text" minlength="1" maxlength="32" placeholder="Enter SSID"/>
 				</div>
 
 				<div class="mui-input-row">
-					<input id="pwd" class="mui-input-password" type="text" placeholder="Enter password" />
+					<input id="pwd" class="mui-input-password" type="text" minlength="8" maxlength="32" style="ime-mode:disabled;" placeholder="Enter password" />
 				</div>
 
 				<div class="mui-input-row mui-input-row-select">
 					<select style="" id="authenticationSelect">
-						<option value="8">AUTO</option>
-						<option value="0">OPEN</option>
-						<option value="6" selected>WPA2</option>
-						<option value="11">WPA3</option>
+						<option value=8>AUTO</option>
+						<option value=0>OPEN</option>
+						<option value=4 selected>WPA2</option>
+						<option value=11>WPA3</option>
 					</select>
 				</div>
 			</div>
