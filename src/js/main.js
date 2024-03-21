@@ -17,7 +17,8 @@ validation.onclick = function(){
     }
 
     pwd = pwd?.trim()
-    if(!pwd || pwd.length < 8 || pwd.length > 32){
+    let pskType = modeSelect.options[modeSelect.selectedIndex].value
+    if(Number(pskType) !== 0 && (!pwd || pwd.length < 8 || pwd.length > 32)){
         mui.toast(language['L3'],{ duration:'long', type:'div' });
         return
     }
@@ -58,8 +59,7 @@ function findChinese(value){
  * 检查当前安全模式
  */
 function checkSecurityModeType(){
-    let target = modeSelect
-    let pskType = target.options[target.selectedIndex].value
+    let pskType = modeSelect.options[modeSelect.selectedIndex].value
     if(Number(pskType) === 0){
         // 开放模式下不需要输入密码
         pwdElement.value = ''
@@ -91,16 +91,13 @@ function connectWifi(ssid, passwd, securityType) {
         success: function (data) {
             console.log('success')
             // mui.toast('success', {duration: 'long', type: 'div'});
-            mui.openWindow({url: 'scan.html', id: 'scan.html',})
+            mui.openWindow({url: 'connecting.html', id: 'connecting.html'})
         },
         error: function (xhr) {
             console.error(xhr)
             mui.toast(xhr.status + ' ' + xhr.statusText, {duration: 'long', type: 'div'});
         }
     });
-
-    // for debug
-    mui.openWindow({url: 'connecting.html', id: 'connecting.html',})
 }
 
 window.onload = function (){

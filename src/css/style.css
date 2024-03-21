@@ -219,7 +219,7 @@ button:enabled:active, button.mui-active:enabled, .mui-btn:enabled:active, .mui-
 .mui-toast-container {
     bottom: 20px !important;
     display: block;
-    width: 100%;
+    width: max-content;
     padding: 0 28px;
 }
 .mui-toast-message {
@@ -227,7 +227,7 @@ button:enabled:active, button.mui-active:enabled, .mui-btn:enabled:active, .mui-
     width: 100%;
     text-align: center;
     line-height: 50px;
-    padding: 0;
+    padding: 0 30px;
     font-family: PingFangSC-Regular;
     font-weight: 400;
     font-size: 14px;
