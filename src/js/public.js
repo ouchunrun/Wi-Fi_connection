@@ -4,8 +4,10 @@
 function loadCopyWriting(){
     const preLocalLang = localStorage.getItem('grpLocale')
     console.log('get pre local lang: ' + preLocalLang)
-
-    let localLang = preLocalLang || 'en-US'
+    // 获取当前浏览器设置的语言
+    let userLanguage = navigator.language || navigator.userLanguage;
+    console.log("The language of the current browser setting is:" + userLanguage);
+    let localLang = preLocalLang || userLanguage
     if (localLang?.indexOf('en') >= 0) {
         localLang = 'en-US'
     } else if (localLang?.indexOf('zh') >= 0) {

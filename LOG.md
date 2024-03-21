@@ -45,3 +45,4 @@
 * 去除扫码功能，captive.apple.com 页面通常是用于认证Wi-Fi网络的登录页面，不具有访问相机权限的功能。无法调用相机进行扫码
 * 使用css linear-gradient() + clip-path 实现页面线性渐变
 * 添加多语言支持，并设置localstorage配置项，如：localStorage.setItem('grpLocale', 'en-US')。目前仅支持中英文设置、默认英文显示
+* 获取手机浏览器的语言设置，中文和英文时，根据浏览器语言显示，其他语言显示为英文
