@@ -15,11 +15,11 @@
     /*left: -40%;*/
     background: linear-gradient(to bottom, #396194, rgb(57 97 148) 60%, #274f82 75%, #274f82);
     top: -140%;
-    left: -27%;
+    left: -25%;
 }
 
 #login-title{
-    height: 200px;
+    height: 166px;
     background: #274f82;
 }
 #wifi-title{
@@ -31,7 +31,7 @@
     color: #FFFFFF;
     letter-spacing: 0;
     text-align: left;
-    top: 79px;
+    top: 45px;
     position: absolute;
     margin: 0 28px
 }
@@ -40,9 +40,9 @@
     font-family: PingFangSC-Regular;
     font-weight: 400;
     font-size: 16px;
-    color: #c8d2df;
+    color: #e7ecf1;
     letter-spacing: 0;
-    top: 132px;
+    top: 98px;
     position: absolute;
     margin: 0 28px;
     line-height: 22px;
