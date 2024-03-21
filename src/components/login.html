@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="../icons/favicon.ico">
+    <title>Wi-Fi Portal Login</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link rel="stylesheet" href="../css/mui.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+    <div id="login-title">
+        <div class="linear triangle"></div>
+        <div id="wifi-title" class="mui-title"></div>
+        <div id="wifi-tip"></div>
+    </div>
+
+    <div class="mui-login" id="login-box">
+        <div class="mui-input-group">
+            <div class="mui-input-row">
+				<span class="input-affix-wrapper">
+					<span class="input-prefix GRP-icon-wifi"></span>
+					<input id="ssid" class="mui-input-clear" type="text" minlength="1" maxlength="32" placeholder=""/>
+				</span>
+            </div>
+
+            <div class="mui-input-row">
+				<span class="input-affix-wrapper">
+					<span class="input-prefix GRP-icon-password"></span>
+					<input id="pwd" class="mui-input-password" type="text" minlength="8" maxlength="32" style="ime-mode:disabled;" placeholder=""/>
+				</span>
+            </div>
+
+            <div class="mui-input-row mui-input-row-select">
+				<span class="input-affix-wrapper">
+					<span class="input-prefix GRP-icon-safe"></span>
+					<select id="safeMode">
+						<option value=8></option>
+						<option value=0></option>
+						<option value=4 selected></option>
+						<option value=11></option>
+					</select>
+				</span>
+            </div>
+
+            <div class="mui-input-row-confirm">
+                <button type="button" class="mui-btn" id="validation">Save</button>
+            </div>
+        </div>
+
+        <!--	toast提示	-->
+<!--        <div class="mui-toast-container mui-active">-->
+<!--            <div class="mui-toast-message">Please enter 1~32 digit SSID</div>-->
+<!--        </div>-->
+    </div>
+</div>
+
+<script type="text/javascript" src="../locale/locale.js"></script>
+<script type="text/javascript" src="../js/public.js"></script>
+<script type="text/javascript" src="../js/mui.js"></script>
+<script type="text/javascript" src="../js/main.js"></script>
+</body>
+</html>

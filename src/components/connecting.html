@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="../icons/favicon.ico">
+    <title>Wi-Fi connecting</title>
+    <link rel="stylesheet" href="../css/mui.css" >
+    <link rel="stylesheet" href="../css/connecting.css">
+</head>
+<body>
+<div id="container">
+    <div class="layout-bg GRP-icon-connect"></div>
+
+    <div class="layout-content">
+        <div class="layout-title-head"></div>
+        <div class="layout-title-content"></div>
+    </div>
+</div>
+
+<script type="text/javascript" src="../locale/locale.js"></script>
+<script type="text/javascript" src="../js/public.js"></script>
+<script>
+    window.onload = function (){
+        let language = loadCopyWriting()
+        document.title = language['L12']
+        let head = document.getElementsByClassName('layout-title-head')[0]
+        let content = document.getElementsByClassName('layout-title-content')[0]
+        head.innerHTML = language['L6']
+        content.innerHTML = language['L7']
+    }
+</script>
+</body>
+</html>

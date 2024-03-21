@@ -38,3 +38,10 @@
   - 1.SSID 限制长度为1~32位
   - 2.安全模式选择开放模式时，设置密码输入框disabled，其他模式，密码长度限制为8~32位
   - 3.密码禁止输入中文
+
+## 2024-3-11
+
+* 根据UI设计修改页面显示
+* 去除扫码功能，captive.apple.com 页面通常是用于认证Wi-Fi网络的登录页面，不具有访问相机权限的功能。无法调用相机进行扫码
+* 使用css linear-gradient() + clip-path 实现页面线性渐变
+* 添加多语言支持，并设置localstorage配置项，如：localStorage.setItem('grpLocale', 'en-US')。目前仅支持中英文设置、默认英文显示
