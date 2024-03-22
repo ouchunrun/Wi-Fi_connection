@@ -6,32 +6,50 @@ let wifiTitle = document.getElementById('wifi-title')
 let wifiTip = document.getElementById('wifi-tip')
 let language
 
-validation.onclick = function(){
-    let ssid = ssidElement.value
-    let pwd = pwdElement.value
-
-    ssid = ssid?.trim()
-    if(!ssid || ssid.length > 32){
-        mui.toast(language['L2'],{ duration:'long', type:'div' });
-        return;
-    }
-
-    pwd = pwd?.trim()
-    let pskType = modeSelect.options[modeSelect.selectedIndex].value
-    if(Number(pskType) !== 0 && (!pwd || pwd.length < 8 || pwd.length > 32)){
-        mui.toast(language['L3'],{ duration:'long', type:'div' });
-        return
-    }
-
-    let type = modeSelect.options[modeSelect.selectedIndex].value
-    connectWifi(ssid, pwd, type)
+const WIFI_PSK_TYPES = {
+    WIFI_PSK_AUTO: 8,
+    WIFI_PSK_OPEN: 0,
+    WIFI_PSK_WPA2: 4,
+    WIFI_PSK_WPA3: 11,
 }
 
 /**
- * 监听下拉选择框该改变事件
- * @type {checkSecurityModeType}
+ * 动态创建PSK option 列表
  */
-modeSelect.onchange = checkSecurityModeType
+function createPSKOptions(){
+    Object.keys(WIFI_PSK_TYPES).forEach(function (key){
+        let option = document.createElement('option')
+        let id = WIFI_PSK_TYPES[key]
+        option.id = id
+        switch (id){
+            case WIFI_PSK_TYPES.WIFI_PSK_AUTO:
+                option.innerText = language['L8']
+                break
+            case WIFI_PSK_TYPES.WIFI_PSK_OPEN:
+                option.innerText = language['L9']
+                break
+            case WIFI_PSK_TYPES.WIFI_PSK_WPA2:
+                option.innerText = language['L10']
+                option.selected = true
+                break
+            case WIFI_PSK_TYPES.WIFI_PSK_WPA3:
+                option.innerText = language['L11']
+                break
+            default:
+                break
+        }
+        modeSelect.appendChild(option)
+    })
+}
+
+/**
+ * 判断是否包含中文
+ * @param value
+ * @returns {boolean}
+ */
+function findChinese(value){
+    return /.*[\u4e00-\u9fa5]+.*$/.test(value);
+}
 
 /**
  * 监听密码输入
@@ -47,20 +65,57 @@ pwdElement.onkeyup = function (event){
 }
 
 /**
- * 判断是否包含中文
- * @param value
- * @returns {boolean}
+ * 输入验证和请求
  */
-function findChinese(value){
-    return /.*[\u4e00-\u9fa5]+.*$/.test(value);
+validation.onclick = function(){
+    let ssid = ssidElement.value
+    let pwd = pwdElement.value
+    let selectOption = modeSelect.options[modeSelect.selectedIndex]
+    let PSKId = Number(selectOption.id)
+
+    ssid = ssid?.trim()
+    pwd = pwd?.trim()
+    if(!ssid){
+        mui.toast(language['L2'],{ duration:'long', type:'div' });
+        return;
+    }
+
+    // 开放: 不需要密码  自动: 密码范围为0或8-32位
+    if(!pwd && PSKId !== WIFI_PSK_TYPES.WIFI_PSK_OPEN && PSKId !== WIFI_PSK_TYPES.WIFI_PSK_AUTO){
+        mui.toast(language['L3'],{ duration:'long', type:'div' });
+        return
+    }
+    // Wi-Fi名称: 1-32位
+    if(ssid.length > 32){
+        mui.toast(language['L15'],{ duration:'long', type:'div' });
+        return;
+    }
+
+    if(PSKId === WIFI_PSK_TYPES.WIFI_PSK_OPEN || (PSKId === WIFI_PSK_TYPES.WIFI_PSK_AUTO && !pwd)){
+
+    }else if(pwd.length < 8 || pwd.length > 32){  // WPA2、WPA3:校验8-32位密码
+        mui.toast(language['L15'],{ duration:'long', type:'div' });
+        return
+    }
+
+    connectWifi(ssid, pwd, selectOption.value)
 }
 
 /**
+ * 监听下拉选择框该改变事件
+ * @type {checkSecurityModeType}
+ */
+modeSelect.onchange = checkSecurityModeType
+
+/**
  * 检查当前安全模式
+ * 自动时校验密码范围为0 或 8-32位
+ * 开放时不需要密码
+ * WPA2、WPA23需要校验8-32位密码
  */
 function checkSecurityModeType(){
-    let pskType = modeSelect.options[modeSelect.selectedIndex].value
-    if(Number(pskType) === 0){
+    let selectOption = modeSelect.options[modeSelect.selectedIndex]
+    if(Number(selectOption.id) === WIFI_PSK_TYPES.WIFI_PSK_OPEN){
         // 开放模式下不需要输入密码
         pwdElement.value = ''
         pwdElement.disabled = true
@@ -95,7 +150,7 @@ function connectWifi(ssid, passwd, securityType) {
         },
         error: function (xhr) {
             console.error(xhr)
-            mui.toast(xhr.status + ' ' + xhr.statusText, {duration: 'long', type: 'div'});
+            mui.toast(language['L16'],{ duration:'long', type:'div' });
         }
     });
 }
@@ -107,25 +162,7 @@ window.onload = function (){
     wifiTip.innerText =  language['L14']
     ssidElement.placeholder = language['L0']
     pwdElement.placeholder = language['L1']
-    for(let i = 0; i<modeSelect.options.length; i++){
-        let option = modeSelect.options[i]
-        switch (option.value){
-            case '8':
-                option.innerText = language['L8']
-                break
-            case '0':
-                option.innerText = language['L9']
-                break
-            case '4':
-                option.innerText = language['L10']
-                break
-            case '11':
-                option.innerText = language['L11']
-                break
-            default:
-                break
-        }
-    }
 
+    createPSKOptions()
     checkSecurityModeType()
 }

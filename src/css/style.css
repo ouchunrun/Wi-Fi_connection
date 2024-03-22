@@ -220,19 +220,23 @@ button:enabled:active, button.mui-active:enabled, .mui-btn:enabled:active, .mui-
     bottom: 20px !important;
     display: block;
     width: max-content;
-    padding: 0 28px;
+    background: #222222e6;
+    border-radius: 5px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% -50%);
+    height: 40px;
 }
 .mui-toast-message {
-    height: 50px;
+    height: 40px;
+    line-height: 40px;
     width: 100%;
-    text-align: center;
-    line-height: 50px;
-    padding: 0 30px;
-    font-family: PingFangSC-Regular;
+    font-family: SFPro-Regular;
     font-weight: 400;
     font-size: 14px;
     color: #FFFFFF;
+    text-align: center;
     letter-spacing: 0;
-    background-color: #abb3bf;
+    padding: 0 17px;
 }
 

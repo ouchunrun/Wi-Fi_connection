@@ -11,6 +11,22 @@ localStorage.setItem('grpLocale', 'zh-CN')
 
 * 目前仅支持中英文设置，默认显示英文。
 
+### 登录处理
+
+* Wi-Fi名称输入框，1-32位，string型
+* Wi-Fi密码输入框，0/8-32位，string型
+* 安全模式选择：枚举包括
+  * 自动: 密码范围为0或8-32位
+  * 开放: 不需要密码
+  * WPA2 (默认):校验8-32位密码
+  * WPA3: 校验8-32位密码
+
+* Toast 提示：
+  * 网络名称未填时，Toast提示【请填写网络名称】
+  * 密码必填时，Toast提示【请填写密码】
+  * 网络名或密码错误时，Toast提示【网络名称或密码错误】
+  * 其他请求错误时，Toast提示【请求错误】
+
 ### ~~jsQR~~
 
 * github: https://github.com/cozmo/jsQR
