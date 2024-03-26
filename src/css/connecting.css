@@ -239,7 +239,7 @@
     0%,
     40%,
     100% {
-        transform: scale(0.4);
+        transform: scale(0.8);
     }
 
     70% {
@@ -250,7 +250,7 @@
     0%,
     40%,
     100% {
-        transform: scale(0.4);
+        transform: scale(0.6);
     }
 
     70% {
