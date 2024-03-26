@@ -98,7 +98,7 @@ validation.onclick = function(){
         return
     }
 
-    connectWifi(ssid, pwd, selectOption.value)
+    connectWifi(ssid, pwd, PSKId)
 }
 
 /**
@@ -144,15 +144,23 @@ function connectWifi(ssid, passwd, securityType) {
         timeout: 10000,
         headers: {'Content-Type': 'application/json;charset=UTF-8'},
         success: function (data) {
-            console.log('success')
-            // mui.toast('success', {duration: 'long', type: 'div'});
-            mui.openWindow({url: 'connecting.html', id: 'connecting.html'})
+            console.log('wifi try connect response data: ', data)
+            if(data && data.reason && data.reason.toUpperCase() === 'OK'){
+                console.log('request success')
+                mui.openWindow({url: 'connecting.html', id: 'connecting.html'})
+            }else {
+                console.error('request error')
+                mui.toast(language['L16'],{ duration:'long', type:'div' });
+            }
+            validation.disabled = false
         },
         error: function (xhr) {
             console.error(xhr)
             mui.toast(language['L16'],{ duration:'long', type:'div' });
+            validation.disabled = false
         }
-    });
+    })
+    validation.disabled = true
 }
 
 window.onload = function (){

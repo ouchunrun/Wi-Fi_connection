@@ -58,3 +58,6 @@
 ## 2024-3-26
 
 * Wi-Fi 连接页面的添加css动画效果
+* 修复api-wifi_try_connect接口请求时，securityType为空问题。代码优化时value修改为id，请求接口漏改导致。
+* 修复api-wifi_try_connect接口请求时，数据错误时，仍跳转到连接页面的问题
+* 修复BUG 293670，添加model.define.js接口，获取设备类型，根据设备类型显示界面
