@@ -271,7 +271,8 @@
     width: 14px;
     height: 3px;
     background-color: white;
-    border-radius: 50% 2px 2px 50%;
+    background-image: linear-gradient(to left, #fcfdff, #3d679b);
+    border-radius: 2px;
     animation: leftToRight 3s linear infinite;
     animation-delay: -1.5s;
 }
@@ -282,7 +283,8 @@
     width: 6px;
     height: 3px;
     background-color: white;
-    border-radius: 50% 2px 2px 50%;
+    background-image: linear-gradient(to left, #fcfdff, #3d679b);
+    border-radius: 2px;
     animation: leftToRight 3s linear infinite;
     animation-delay: 0s;
 }
@@ -300,7 +302,8 @@
     width: 14px;
     height: 3px;
     background-color: white;
-    border-radius: 50% 2px 2px 50%;
+    background-image: linear-gradient(to left, #fcfdff, #3d679b);
+    border-radius: 2px;
     animation: rightToLeft 3s linear infinite;
     animation-delay: 0s;
 }
@@ -311,7 +314,8 @@
     width: 6px;
     height: 3px;
     background-color: white;
-    border-radius: 50% 2px 2px 50%;
+    background-image: linear-gradient(to left, #fcfdff, #3d679b);
+    border-radius: 2px;
     animation: rightToLeft 3s linear infinite;
     animation-delay: -1.5s;
 }
