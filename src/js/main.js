@@ -141,7 +141,7 @@ function connectWifi(ssid, passwd, securityType) {
         },
         dataType: 'json',
         type: 'POST',
-        timeout: 10000,
+        timeout: 5000,
         headers: {'Content-Type': 'application/json;charset=UTF-8'},
         success: function (data) {
             console.log('wifi try connect response data: ', data)
