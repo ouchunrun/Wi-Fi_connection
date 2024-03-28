@@ -4,12 +4,14 @@ let content
 let language
 
 window.onload = function (){
-    getModelDefines()
+    // getModelDefines()
 
     language = loadCopyWriting()
     document.title = language['L12']
     head = document.getElementsByClassName('layout-title-head')[0]
     content = document.getElementsByClassName('layout-title-content')[0]
+    head.innerHTML = language['L6']
+    content.innerHTML = language['L7']
 }
 
 /**
